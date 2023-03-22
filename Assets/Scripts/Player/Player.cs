@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamagable
 {
     [SerializeField] private Needs _health;
     [SerializeField] private Needs _hunger;
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _hungerHealthDecay;
     [SerializeField] private float _thirstHealthDecay;
     [SerializeField] private float _radiationHealthDecay;
+
+    public UnityEvent onTakeDamage;
     
 
     //[SerializeField] private Transform _shootPoint;
@@ -36,14 +39,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _hunger.RemoveValue(_hunger.DecayRate*Time.deltaTime);
-        _thristy.RemoveValue(_thristy.DecayRate*Time.deltaTime);
+       
+        InsertStausBar();
+    }
+
+    private  void InsertStausBar()
+    {
+        _hunger.RemoveValue(_hunger.DecayRate * Time.deltaTime);
+        _thristy.RemoveValue(_thristy.DecayRate * Time.deltaTime);
         _radiation.AddValue(_radiation.Regenerate * Time.deltaTime);
 
         if (_hunger.CurrentValue == 0.0f)
         {
             _health.RemoveValue(_hungerHealthDecay * Time.deltaTime);
-        } 
+        }
 
         if (_thristy.CurrentValue == 0.0f)
         {
@@ -55,6 +64,11 @@ public class Player : MonoBehaviour
             _health.RemoveValue(_radiationHealthDecay * Time.deltaTime);
         }
 
+        if (_health.CurrentValue == 0f)
+        {
+            Die();
+        }
+
         _health.Uibar.fillAmount = _health.GetPercentage();
         _hunger.Uibar.fillAmount = _hunger.GetPercentage();
         _thristy.Uibar.fillAmount = _thristy.GetPercentage();
@@ -63,39 +77,42 @@ public class Player : MonoBehaviour
 
     public void Heal(float amount)
     {
-
+        _health.AddValue(amount);
     } 
 
     public void Eat(float amount)
     {
+        _hunger.AddValue(amount);
 
     }
 
     public void Drink(float amount)
     {
+        _thristy.AddValue(amount);
 
     }
 
     public void Radiation(float amount)
     {
-
+        _radiation.RemoveValue(amount);
     } 
 
-    public void TakeDamage(int damage)
+    public void TakePhysicalDamage(int damage)
     {
-
+        _health.RemoveValue(damage);
+        onTakeDamage?.Invoke(); 
     }
 
     public void Die()
     {
-
+        Debug.Log("Персонаж мертв");
     }
-
+   
 }
 
 [System.Serializable]
 public class Needs
-{ 
+{
     public float CurrentValue;
     public float MaxValue;
     public float StartValue;
@@ -106,7 +123,7 @@ public class Needs
 
     public void AddValue(float amount)
     {
-        CurrentValue = Mathf.Min(CurrentValue+amount,MaxValue);// возвращает одно  минимальное значение из  двух 
+        CurrentValue = Mathf.Min(CurrentValue + amount, MaxValue);// возвращает одно  минимальное значение из  двух 
     }
 
     public void RemoveValue(float amount)
@@ -116,8 +133,13 @@ public class Needs
 
     public float GetPercentage()
     {
-        return CurrentValue/MaxValue;
+        return CurrentValue / MaxValue;
     }
 }
+    public interface IDamagable 
+    {
+         void TakePhysicalDamage(int damageAmount);
+    }
+
 
 
