@@ -7,10 +7,10 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    [SerializeField] private Needs _health;
-    [SerializeField] private Needs _hunger;
-    [SerializeField] private Needs _thristy;
-    [SerializeField] private Needs _radiation;
+    [SerializeField] private StatusBar _health;
+    [SerializeField] private StatusBar _hunger;
+    [SerializeField] private StatusBar _thristy;
+    [SerializeField] private StatusBar _radiation;
 
     [SerializeField] private float _hungerHealthDecay;
     [SerializeField] private float _thirstHealthDecay;
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour, IDamagable
 }
 
 [System.Serializable]
-public class Needs
+public class StatusBar
 {
     public float CurrentValue;
     public float MaxValue;
