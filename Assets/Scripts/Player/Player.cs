@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         // 1. ѕри старте игры у персонажа ничего нет и он не может стрел€ть
         //2. ѕосле присвоени€ текущему оружию статус IsEquepud
-         //CurrentWeapon =_weapons[0];
+        //CurrentWeapon =_weapons[0];
         _health.CurrentValue = _health.StartValue;
         _hunger.CurrentValue = _hunger.StartValue;
         _thristy.CurrentValue = _thristy.StartValue;

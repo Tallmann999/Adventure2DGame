@@ -12,10 +12,20 @@ public class ItemDatabase : ScriptableObject
         Consumable
     }
 
+    enum EquoipableType
+    { 
+        None,
+        Head,
+        Body,        
+        Arms,
+        Legs,
+    }
+
     [SerializeField] private string _name;
     [SerializeField] private string _description;
-    [SerializeField] private int _weight;
+    [SerializeField] private float _weight;
     [SerializeField] private ItemType _itemType;
+    [SerializeField] private EquoipableType _equoipableType;
     [SerializeField] private Sprite _icon;
     [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private bool _canStachItem;

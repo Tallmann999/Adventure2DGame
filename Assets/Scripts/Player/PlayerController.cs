@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private GameObject _crosshair;
     [SerializeField] private float _crosshairDistance = 1.0f;
-    [SerializeField] private GameObject _bulletPrefabs;
-    [SerializeField] private float _bulletBaseSpeed = 1.0f;
+    //[SerializeField] private GameObject _bulletPrefabs;
+    //[SerializeField] private float _bulletBaseSpeed = 1.0f;
     [SerializeField] private GameObject _dialogImage;
     [SerializeField] private Transform _shootPoint;
 
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ProcessInput();
         Move();
         Animate();
         Aim();
@@ -64,19 +63,30 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-    private void ProcessInput()
-    {
-        _movementSpeed = Mathf.Clamp(_movingDirection.magnitude, 0.0f, 1.0f);
-        _movingDirection.Normalize();
-        EndAiming = Input.GetButtonDown("Fire1");
-    }
-
     private void Move()
     {
         _movingDirection.x = Input.GetAxis("Horizontal");
         _movingDirection.y = Input.GetAxis("Vertical");
 
         _rigidbody.velocity = _movingDirection * _movementSpeed * _movementBaseSpeed;
+
+        _movementSpeed = Mathf.Clamp(_movingDirection.magnitude, 0.0f, 1.0f);
+        _movingDirection.Normalize();
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _movementBaseSpeed = 4f;
+            _animator.SetFloat("Speed", 2);
+        }
+        else
+        {
+            _movementBaseSpeed = 2f;
+            _animator.SetFloat("Speed", _movementSpeed);
+        }
+
+
+
+        //EndAiming = Input.GetButtonDown("Fire1");
     }
 
     private void Animate()
@@ -86,9 +96,13 @@ public class PlayerController : MonoBehaviour
             _animator.SetFloat("Horizontal", _movingDirection.x);
             _animator.SetFloat("Vertical", _movingDirection.y);
         }
+
         _animator.SetFloat("Speed",_movementSpeed);
 
-
+        //if (_player.Health.CurrentValue == 0)
+        //{
+        //    _animator.SetBool("IsDead", true);
+        //}
     }
 
     private void Aim()
