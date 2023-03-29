@@ -111,18 +111,18 @@ public class PlayerController : MonoBehaviour
         {
             _crosshair.transform.localPosition = _movingDirection * _crosshairDistance;
            
-            RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position + _movingDirection * 0.2f, _movingDirection, 1f, LayerMask.GetMask("Workbench"));
+            //RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position + _movingDirection * 0.2f, _movingDirection, 1f, LayerMask.GetMask("Workbench"));
 
-            if (hit.collider != null)
-            {
-                Debug.DrawRay(transform.position, _movingDirection, Color.red);
-                _dialogImage.SetActive(true);
-            }
-            else
-            {
-                _dialogImage.SetActive(false);
+            //if (hit.collider != null)
+            //{
+            //    Debug.DrawRay(transform.position, _movingDirection, Color.red);
+            //    _dialogImage.SetActive(true);
+            //}
+            //else
+            //{
+            //    _dialogImage.SetActive(false);
 
-            }
+            //}
         }
     }
 
