@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private int PlayerId;
+    //[SerializeField] private int PlayerId;
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _movementBaseSpeed = 1.0f;
     [SerializeField] private Rigidbody2D _rigidbody;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Player _player;
     private Animator _animator;
     private Vector2 _movingDirection;
+
     private bool EndAiming = true;
     private void Awake()
     {
@@ -45,28 +46,13 @@ public class PlayerController : MonoBehaviour
             // 
                 //Shoot();
         }
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position+Vector2.up*0.2f, _movingDirection,1.5f,LayerMask.GetMask("Workbench")); 
-
-        //    if (hit.collider != null)
-        //    {
-        //        Debug.Log("Луч касаеться обьекта"+hit.collider.gameObject);
-        //        _dialogImage.SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        _dialogImage.SetActive(false);
-
-        //    }
-        //}
     }
 
     private void Move()
     {
         _movingDirection.x = Input.GetAxis("Horizontal");
         _movingDirection.y = Input.GetAxis("Vertical");
+        //MovingDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         _rigidbody.velocity = _movingDirection * _movementSpeed * _movementBaseSpeed;
 
@@ -99,10 +85,6 @@ public class PlayerController : MonoBehaviour
 
         _animator.SetFloat("Speed",_movementSpeed);
 
-        //if (_player.Health.CurrentValue == 0)
-        //{
-        //    _animator.SetBool("IsDead", true);
-        //}
     }
 
     private void Aim()

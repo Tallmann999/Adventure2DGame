@@ -9,7 +9,8 @@ public class ItemDatabase : ScriptableObject
     {
         Resourse,
         Equipable,
-        Consumable
+        Consumable,
+        WorkBench
     }
 
     enum EquoipableType
