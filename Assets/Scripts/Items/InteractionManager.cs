@@ -22,12 +22,10 @@ public class InteractionManager : MonoBehaviour
 
     private GameObject currentInteractGameObject;
     private  IInteractable currentInteractable;
-    private Camera cam;
     public Transform pointInteractable;
 
     private void Start()
     {
-        cam = Camera.main;
     }
 
     private void Update()

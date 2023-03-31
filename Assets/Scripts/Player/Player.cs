@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
+
 
 
 public class Player : MonoBehaviour, IDamagable
@@ -17,24 +19,29 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private float _radiationHealthDecay;
 
     public UnityEvent onTakeDamage;
-    
+
 
     //[SerializeField] private Transform _shootPoint;
     //[SerializeField] private List<Weapon> _weapons;
 
     public Weapon CurrentWeapon { get; private set; }
-    public  bool IsEquepud { get; private set; } = false;
-
+    public bool IsEquepud { get; private set; } = false;
+    [Header("—таты персонажа")]
+    [SerializeField] private TextMeshProUGUI _statPlayerName;
+    [SerializeField] private TextMeshProUGUI _statPlayerValue;
 
     private void Start()
     {
         // 1. ѕри старте игры у персонажа ничего нет и он не может стрел€ть
         //2. ѕосле присвоени€ текущему оружию статус IsEquepud
         //CurrentWeapon =_weapons[0];
+
         _health.CurrentValue = _health.StartValue;
         _hunger.CurrentValue = _hunger.StartValue;
         _thristy.CurrentValue = _thristy.StartValue;
         _radiation.CurrentValue = _radiation.StartValue;
+
+        _statPlayerValue.text = _health.CurrentValue.ToString();
     }
 
     private void Update()

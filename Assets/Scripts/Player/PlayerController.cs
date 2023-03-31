@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _dialogImage.SetActive(false);
     }
 
     private void FixedUpdate()

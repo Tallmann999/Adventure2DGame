@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item",menuName = "New Item")]
-public class ItemDatabase : ScriptableObject
+public class ItemDatabases : ScriptableObject
 {
     enum ItemType
     {
@@ -14,11 +14,13 @@ public class ItemDatabase : ScriptableObject
     }
 
     enum EquoipableType
-    { 
+    {
         None,
         Head,
-        Body,        
+        Body,
+        Backpack,
         Arms,
+        Weapon,
         Legs,
     }
 
@@ -27,7 +29,7 @@ public class ItemDatabase : ScriptableObject
     [SerializeField] private float _weight;
     [SerializeField] private ItemType _itemType;
     [SerializeField] private EquoipableType _equoipableType;
-    [SerializeField] private Sprite _icon;
+    public  Sprite Icon;
     [SerializeField] private GameObject _dropPrefab;
     [SerializeField] private bool _canStachItem;
     [SerializeField] private int _maxStackAmount;
