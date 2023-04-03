@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour, IInteractable
 {
-    [SerializeField] private ItemDatabases _item;
+    [SerializeField] private ItemDatabase _item;
 
     public string GetInteractPromt()
     {

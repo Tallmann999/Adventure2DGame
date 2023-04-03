@@ -16,7 +16,7 @@ public class ItemSlotsUi : MonoBehaviour
     private Outline _outLine;
     public  bool _isEquipped;
 
-    public int Index;
+    public int Index { get; private set; }
 
     private void Awake()
     {
@@ -52,6 +52,11 @@ public class ItemSlotsUi : MonoBehaviour
         _quantityText.text = string.Empty;
     }
 
+    public int IndexSet( int index)
+    {
+        return Index = index;
+    }
+   
     public void OnClickButton()
     {
 
