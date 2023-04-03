@@ -23,8 +23,10 @@ public class PlayerController : MonoBehaviour
     private Player _player;
     private Animator _animator;
     private Vector2 _movingDirection;
-
     private bool EndAiming = true;
+
+    private  bool canLook = true;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -118,5 +120,11 @@ public class PlayerController : MonoBehaviour
     //    bullet.transform.Rotate(0, 0, Mathf.Atan2(shotingDirection.y, shotingDirection.x) * Mathf.Rad2Deg);
     //    Destroy(bullet, 2.0f);
     //}
+
+    public void ToogleCursor(bool toggle)
+    {
+        Cursor.lockState = toggle? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
+    }
 }
 

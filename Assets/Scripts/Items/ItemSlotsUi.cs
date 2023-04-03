@@ -8,7 +8,7 @@ public class ItemSlotsUi : MonoBehaviour
 {
 
 
-    [SerializeField] private Button _button;
+    public Button _button;
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _quantityText;
 
@@ -59,7 +59,7 @@ public class ItemSlotsUi : MonoBehaviour
    
     public void OnClickButton()
     {
-
+        Inventory.instance.SelectedItem(Index);
     }
 
 

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private Needs _hunger;
     [SerializeField] private Needs _thristy;
     [SerializeField] private Needs _radiation;
-
+    
     [SerializeField] private float _hungerHealthDecay;
     [SerializeField] private float _thirstHealthDecay;
     [SerializeField] private float _radiationHealthDecay;
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour, IDamagable
 
     public Weapon CurrentWeapon { get; private set; }
     public bool IsEquepud { get; private set; } = false;
+
     [Header("Статы персонажа")]
     [SerializeField] private TextMeshProUGUI _statPlayerName;
     [SerializeField] private TextMeshProUGUI _statPlayerValue;
@@ -46,11 +47,11 @@ public class Player : MonoBehaviour, IDamagable
 
     private void Update()
     {
-       
-        InsertStausBar();
+        _statPlayerValue.text = _health.CurrentValue.ToString();
+        InsertStatusBar();
     }
 
-    private  void InsertStausBar()
+    private  void InsertStatusBar()
     {
         _hunger.RemoveValue(_hunger.DecayRate * Time.deltaTime);
         _thristy.RemoveValue(_thristy.DecayRate * Time.deltaTime);

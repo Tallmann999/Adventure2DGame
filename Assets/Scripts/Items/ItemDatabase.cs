@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item",menuName = "New Item")]
+[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemDatabase : ScriptableObject
 {
-    enum ItemType
+    public enum ItemType
     {
         Resourse,
         Equipable,
@@ -13,7 +11,7 @@ public class ItemDatabase : ScriptableObject
         WorkBench
     }
 
-    enum EquoipableType
+    public  enum EquoipableType
     {
         None,
         Head,
@@ -24,13 +22,24 @@ public class ItemDatabase : ScriptableObject
         Legs,
     }
 
-    [SerializeField] private string _name;
+    [SerializeField]private string _name;
     [SerializeField] private string _description;
     [SerializeField] private float _weight;
-    [SerializeField] private ItemType _itemType;
-    [SerializeField] private EquoipableType _equoipableType;
-    public  Sprite Icon;
+    [SerializeField] private ItemType _itemTypes;
+    [SerializeField] private EquoipableType _equoipableTypes;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private GameObject _dropPrefab;
-    public bool CanStackItem;
+    [SerializeField] private bool _canStackItem;
     [SerializeField] private int _maxStackAmount;
+
+    public string Name => _name;
+    public string Description => _description;
+    public float Weight => _weight;
+    public ItemType ItemTypes => _itemTypes;
+    public EquoipableType EquoipableTypes => _equoipableTypes;
+    public Sprite Icon => _icon;
+    public GameObject DropPrefab => _dropPrefab;
+    public bool CanStackItem => _canStackItem;
+    public int MaxStackAmount => _maxStackAmount;
+
 }
